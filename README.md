@@ -2,6 +2,8 @@
 
 This widget is a frontend crowdsource-application on the [HetVolk.org](https://hetvolk.org/) API. The widget feeds you a photo from a chosen crowdsource project and lets you set the cameraposition, camera angle and the position of the object photographed.
 
+![screendump](public/images/screendump.jpg)
+
 This widget uses the [Leaflet.GeotagPhoto plugin](https://github.com/nypl-spacetime/Leaflet.GeotagPhoto) by the New York Public Library.
 
 
