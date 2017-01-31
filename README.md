@@ -1,26 +1,20 @@
-# Slim Framework 3 Skeleton Application
+# Viewpoint Widget hetvolk.org
 
-Use this skeleton application to quickly setup and start working on a new Slim Framework 3 application. This application uses the latest Slim 3 with the PHP-View template renderer. It also uses the Monolog logger.
+This widget is a frontend crowdsource-application on the [HetVolk.org](https://hetvolk.org/) API. The widget feeds you a photo from a chosen crowdsource project and lets you set the cameraposition, camera angle and the position of the object photographed.
 
-This skeleton application was built for Composer. This makes setting up a new Slim Framework application quick and easy.
+This widget uses the [Leaflet.GeotagPhoto plugin](https://github.com/nypl-spacetime/Leaflet.GeotagPhoto) by the New York Public Library.
 
-## Install the Application
 
-Run this command from the directory in which you want to install your new Slim Framework application.
 
-    php composer.phar create-project slim/slim-skeleton [my-app-name]
+## Install the Widget
 
-Replace `[my-app-name]` with the desired directory name for your new application. You'll want to:
+_Please note that the HetVolk.org backend-
+ application and API are not open sourced (yet). If you would like to run a crowdsource project, please contact the people of HetVolk.org._
 
-* Point your virtual host document root to your new application's `public/` directory.
-* Ensure `logs/` is web writeable.
+1. git clone this repository to a directory
+1. In a terminal: move into your directory
+1. Download Composer ```curl -sS https://getcomposer.org/installer | php```
+1. And run php ```composer.phar install```
+1. Point your virtual host document root to your new application's `public/` directory.
+1. Ensure `logs/` is web writeable.
 
-To run the application in development, you can also run this command. 
-
-	php composer.phar start
-
-Run this command to run the test suite
-
-	php composer.phar test
-
-That's it! Now go build something cool.
