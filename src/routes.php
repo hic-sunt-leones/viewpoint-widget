@@ -1,7 +1,10 @@
 <?php
 // Routes
 
+
 $app->get('/', function ($request, $response, $args) {
+
+    $args['baseUrl'] = $this->get('settings')['baseUrl'];
 
 	if(isset($_SESSION['project'])){
 		return $this->renderer->render($response, 'start.php', $args);
@@ -92,15 +95,40 @@ $app->get('/user/stats', function ($request, $response, $args) {
 
 $app->get('/get-task', function ($request, $response, $args) {
 
+    $args['baseUrl'] = $this->get('settings')['baseUrl'];
+
     // get new task from hetvolk api
-	$mapper = new Leones\VolksMapper($this->get('settings')['api']);
+    $mapper = new Leones\VolksMapper($this->get('settings')['api']);
     $args['task'] = $mapper->getTask();
 
-    if(!$args['task']){						// probably, Expired JWT Token
-    	unset($_SESSION['token']);
-    	unset($_SESSION['user']);
-    	$uri = $this->router->pathFor('home');
-		return $response = $response->withRedirect($uri, 403);
+    if(!$args['task']){                     // probably, Expired JWT Token
+        unset($_SESSION['token']);
+        unset($_SESSION['user']);
+        $uri = $this->router->pathFor('home');
+        return $response = $response->withRedirect($uri, 403);
+    }
+
+    $mapLatLon = explode(",",$args['task']['mapLatLon']);
+    $args['task']['mapLonLat'] = trim($mapLatLon[1]) . ", " . trim($mapLatLon[0]);
+    
+    return $this->renderer->render($response, 'task.php', $args);
+})->setName('task')->add($projectExists)->add($userExists);
+
+
+
+
+
+$app->get('/try-task', function ($request, $response, $args) { 
+
+    // get new task from hetvolk api
+    $mapper = new Leones\VolksMapper($this->get('settings')['api']);
+    $args['task'] = $mapper->getTask();
+
+    if(!$args['task']){                     // probably, Expired JWT Token
+        unset($_SESSION['token']);
+        unset($_SESSION['user']);
+        $uri = $this->router->pathFor('home');
+        return $response = $response->withRedirect($uri, 403);
     }
 
     $mapLatLon = explode(",",$args['task']['mapLatLon']);
@@ -134,9 +162,19 @@ $app->post('/save-task', function ($request, $response, $args) {
 
 
 $app->get('/skip-task', function ($request, $response, $args) {
-    $_SESSION['ff'] = "just skipped " . $_GET['itemId'];
-	$uri = $this->router->pathFor('task');
-	return $response = $response->withRedirect($uri, 302);
+
+    // tell hetvolk api user has skipped task
+    $mapper = new Leones\VolksMapper($this->get('settings')['api']);
+    $skipped = $mapper->skipTask($_GET['itemId']);
+
+    if($skipped){
+        $_SESSION['randomThanks'] = rand(1,24);
+        $uri = $this->router->pathFor('task');
+        return $response = $response->withRedirect($uri, 302);
+    }else{
+        $response->getBody()->write(' hij doet t niet :-( ');
+        return $response;
+    }
 })->add($projectExists)->add($userExists);
 
 
@@ -144,7 +182,10 @@ $app->get('/skip-task', function ($request, $response, $args) {
 
 
 $app->get('/thanks', function ($request, $response, $args) {
+
+    $args['baseUrl'] = $this->get('settings')['baseUrl'];
     $args['toNewTask'] = $this->router->pathFor('task');
+
     return $this->renderer->render($response, 'thanks.php', $args);
 })->setName('thanks')->add($projectExists)->add($userExists);
 

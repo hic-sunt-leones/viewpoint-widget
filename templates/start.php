@@ -22,7 +22,7 @@
 					</p>
 
 					<p><br />
-					<a href="/get-task" class="btn btn-primary"> Geef mij maar een taak! </a> <a href="/taak/" class="btn btn-primary"> Oefenen </a>
+					<a href="<?= $baseUrl ?>get-task" class="btn btn-primary"> Geef mij maar een taak! </a> <a href="<?= $baseUrl ?>try-task/" class="btn btn-primary"> Oefenen </a>
 					</p>
 				</div>
 
@@ -31,7 +31,7 @@
 					<div class="col-md-6">
 						<h2>Log in</h2>
 
-						<form action="/user/login" method="post">
+						<form action="<?= $baseUrl ?>user/login" method="post">
 
 						<input class="form-control" placeholder="gebruikersnaam of emailadres" type="text" name="name" /><br />
 

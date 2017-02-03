@@ -56,7 +56,7 @@
 		    </div>
 
 
-		    <form id="task-form" action="/save-task" method="post">
+		    <form id="task-form" action="<?= $baseUrl ?>save-task" method="post">
           <input class="form-control" type="hidden" name="itemId" id="itemId" value="<?= $task['item']['id'] ?>" />
           <input class="form-control" type="hidden" name="targetPoint" id="targetPoint" />
 		    	<input class="form-control" type="hidden" name="cameraPoint" id="cameraPoint" />
@@ -96,8 +96,8 @@
     scrollWheelZoom: false
   });
 
-  var baseLayer = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>'
+  var baseLayer = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   }).addTo(map);
 
   var cameraPoint = [<?= $task['mapLonLat'] ?>]
@@ -124,19 +124,13 @@
 
   var options = {
     cameraIcon: L.icon({
-      iconUrl: 'assets/img/camera.svg',
+      iconUrl: 'public/assets/img/camera.svg',
       iconSize: [38, 38],
       iconAnchor: [19, 19]
     }),
 
     targetIcon: L.icon({
-      iconUrl: 'assets/img/target.svg',
-      iconSize: [180, 32],
-      iconAnchor: [90, 16]
-    }),
-
-    targetIcon: L.icon({
-      iconUrl: 'assets/img/target.svg',
+      iconUrl: 'public/assets/img/target.svg',
       iconSize: [180, 32],
       iconAnchor: [90, 16]
     })
@@ -187,7 +181,7 @@
 
     $( "#skip-button" ).click(function() {
      // $.post( "/skip-task", $( "#task-form" ).serialize() );
-      window.location = "/skip-task?itemId=" + $('#itemId').val() ;
+      window.location = "<?= $baseUrl ?>skip-task?itemId=" + $('#itemId').val() ;
     });
 
   });

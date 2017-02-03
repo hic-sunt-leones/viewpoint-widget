@@ -152,6 +152,7 @@ class Volksmapper
                         );
         $data_string = json_encode($postData);
 
+        print_r($postData);
         $ch = curl_init($url);  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
@@ -167,6 +168,50 @@ class Volksmapper
             //echo 'Curl error: ' . curl_error($ch);
         }else{
             //echo 'Operation completed without any errors';
+        }
+        $info = curl_getinfo($ch);
+
+        curl_close($ch);
+        //print_r($info);
+        
+        $data = json_decode($output,true);
+        
+        if($info['http_code']===200){
+            return true;
+        }else{
+            return false;
+        }
+
+
+    }
+
+
+    public function skipTask($itemId){
+        
+        $url = $this->settings['apiUrl'] . "tasks/skip";
+        $postData = array(
+                        "task"=> array(
+                                    "projectId"=>$_SESSION['project']['id'],
+                                    "itemId"=>$itemId
+                                )
+                        );
+        $data_string = json_encode($postData);
+
+        $ch = curl_init($url);  
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($data_string),
+                'Authorization: Bearer ' . $_SESSION['token']
+            )
+        );
+        $output = curl_exec($ch);
+        if($output === false){
+            echo 'Curl error: ' . curl_error($ch);
+        }else{
+            echo 'Operation completed without any errors';
         }
         $info = curl_getinfo($ch);
 

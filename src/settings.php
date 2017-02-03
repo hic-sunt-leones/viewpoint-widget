@@ -3,7 +3,7 @@ return [
     'settings' => [
         'displayErrorDetails' => true, // set to false in production
         'addContentLengthHeader' => false, // Allow the web server to send the content-length header
-        'baseUrl' => '/', // base web url for app
+        'baseUrl' => '/viewpoint-widget/', // base web url for app
 
         // Renderer settings
         'renderer' => [
