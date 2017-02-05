@@ -1,5 +1,5 @@
 <?php
-// Routes
+
 
 
 $app->get('/', function ($request, $response, $args) {
@@ -9,11 +9,9 @@ $app->get('/', function ($request, $response, $args) {
 	if(isset($_SESSION['project'])){
 		return $this->renderer->render($response, 'start.php', $args);
 	}else{
-	    // Render view
 	    return $this->renderer->render($response, 'noproject.php', $args);
 	}
 })->setName('home');
-
 
 
 
@@ -34,7 +32,6 @@ $app->get('/get-project/{uuid}', function ($request, $response, $args) {
     	$uri = $request->getUri()->withPath($this->router->pathFor('home'));
 		return $response = $response->withRedirect($uri, 302);
     }
-    
 });
 
 
@@ -84,9 +81,7 @@ $app->get('/user/logout', function ($request, $response, $args) {
 
 
 $app->get('/user/stats', function ($request, $response, $args) {
-
     $response->getBody()->write(' Hello you stats want, eh? ');
-
 	return $response;
 });
 
@@ -189,22 +184,6 @@ $app->get('/thanks', function ($request, $response, $args) {
     return $this->renderer->render($response, 'thanks.php', $args);
 })->setName('thanks')->add($projectExists)->add($userExists);
 
-
-
-
-
-
-
-
-
-
-
-
-$app->get('/test', function ($request, $response, $args) {
-    $response->getBody()->write(' Hello ');
-
-	return $response;
-})->setName('ffteste');
 
 
 

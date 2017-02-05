@@ -11,7 +11,6 @@ class Volksmapper
 
     // vars
     public $settings = array();
-    public $project = array();
 
 
     // methods
@@ -22,15 +21,10 @@ class Volksmapper
         curl_setopt($ch,CURLOPT_URL,$url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         curl_setopt($ch,CURLOPT_HEADER, "Accept:application/json"); 
-        //curl_setopt($ch,CURLOPT_HEADER, "Authorization:Bearer $token"); 
-        //curl_setopt($ch,CURLOPT_POSTFIELDS, $postData);    
         $output=curl_exec($ch);
         curl_close($ch);
 
         $data = json_decode($output,true);
-
-        //print_r($output);
-        //die($url);
 
         if(isset($data['project'])){
             $data['project']['uuid'] = $uuid;
@@ -50,7 +44,6 @@ class Volksmapper
         curl_setopt($ch,CURLOPT_URL,$url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         curl_setopt($ch,CURLOPT_HEADER, "Accept:application/json"); 
-        //curl_setopt($ch,CURLOPT_HEADER, "Authorization:Bearer $token"); 
         curl_setopt($ch,CURLOPT_POSTFIELDS, $postData);    
         $output=curl_exec($ch);
         curl_close($ch);
@@ -70,26 +63,11 @@ class Volksmapper
         
         $url = $this->settings['apiUrl'] . "people/me";
        
-        $ch = curl_init($url);  
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                'Content-Type: application/json',
-                'Content-Length: 0',
-                'Authorization: Bearer ' . $_SESSION['token']
-            )
-        );
-        $output = curl_exec($ch);
-        if($output === false){
-            //echo 'Curl error: ' . curl_error($ch);
-        }else{
-            //echo 'Operation completed without any errors';
-        }
-        curl_close($ch);
+        $curl = $this->getCurlResponse($url);
 
-        $data = json_decode($output,true);
-        
-        if(isset($data['user'])){
+        $data = json_decode($curl,true);
+
+        if($data['user']){
             return $data['user'];
         }else{
             return false;
@@ -103,30 +81,11 @@ class Volksmapper
         
         $url = $this->settings['apiUrl'] . "tasks/next";
         $postData = array("task"=> array("projectId"=>$_SESSION['project']['id']));
-        $data_string = json_encode($postData);
 
-        $ch = curl_init($url);  
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                'Content-Type: application/json',
-                'Content-Length: ' . strlen($data_string),
-                'Authorization: Bearer ' . $_SESSION['token']
-            )
-        );
-        $output = curl_exec($ch);
-        if($output === false){
-            //echo 'Curl error: ' . curl_error($ch);
-        }else{
-            //echo 'Operation completed without any errors';
-        }
-        curl_close($ch);
-        //print_r($output);
-        
-        $data = json_decode($output,true);
-        
-        if(isset($data['task'])){
+        $curl = $this->getCurlResponse($url,$postData);
+
+        $data = json_decode($curl,true);
+        if($data['task']){
             return $data['task'];
         }else{
             return false;
@@ -150,33 +109,9 @@ class Volksmapper
                                             )
                                 )
                         );
-        $data_string = json_encode($postData);
-
-        print_r($postData);
-        $ch = curl_init($url);  
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                'Content-Type: application/json',
-                'Content-Length: ' . strlen($data_string),
-                'Authorization: Bearer ' . $_SESSION['token']
-            )
-        );
-        $output = curl_exec($ch);
-        if($output === false){
-            //echo 'Curl error: ' . curl_error($ch);
-        }else{
-            //echo 'Operation completed without any errors';
-        }
-        $info = curl_getinfo($ch);
-
-        curl_close($ch);
-        //print_r($info);
+        $curl = $this->getCurlResponse($url,$postData);
         
-        $data = json_decode($output,true);
-        
-        if($info['http_code']===200){
+        if($curl){
             return true;
         }else{
             return false;
@@ -195,7 +130,26 @@ class Volksmapper
                                     "itemId"=>$itemId
                                 )
                         );
-        $data_string = json_encode($postData);
+        
+        $curl = $this->getCurlResponse($url,$postData);
+
+        if($curl){
+            return true;
+        }else{
+            return false;
+        }
+
+
+    }
+
+
+    private function getCurlResponse($url, $postData = array()){
+
+        if(empty($postData)){
+            $data_string = "";
+        }else{
+            $data_string = json_encode($postData);
+        }
 
         $ch = curl_init($url);  
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -210,24 +164,18 @@ class Volksmapper
         $output = curl_exec($ch);
         if($output === false){
             echo 'Curl error: ' . curl_error($ch);
-        }else{
-            echo 'Operation completed without any errors';
-        }
-        $info = curl_getinfo($ch);
-
-        curl_close($ch);
-        print_r($info);
-        
-        // TODO: CHECK IF API WAS OK WITH OUR LATEST REQUEST
-
-        $data = json_decode($output,true);
-        
-        if($info['http_code']===200){
-            return true;
-        }else{
             return false;
         }
 
+        $info = curl_getinfo($ch);
+        curl_close($ch);
+        
 
+        if($info['http_code']===200){
+            return $output;
+        }else{
+            print_r($info);
+            return false;
+        }
     }
 }

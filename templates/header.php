@@ -68,9 +68,9 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <? if(isset($_SESSION['user'])){ ?>
-                    <li><a href="/user/logout"><? echo $_SESSION['user']['username']; ?> uitloggen </a></li>
+                    <li><a href="<?= $baseUrl ?>user/logout"><? echo $_SESSION['user']['username']; ?> uitloggen </a></li>
                 <? }else{ ?>
-                    <li><a href=""><? echo $_SESSION['user']['username']; ?> inloggen? </a></li>
+                    <li><a href="<?= $baseUrl ?>"><? echo $_SESSION['user']['username']; ?> inloggen? </a></li>
                 <? } ?>
             </ul>
         </div>
