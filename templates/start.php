@@ -11,7 +11,7 @@
 		<div class="col-md-6">
 
 
-			<? if(isset($_SESSION['user'])){ ?>
+			<?php if(isset($_SESSION['user'])){ ?>
 
 
 				<div class="startblok">
@@ -26,7 +26,7 @@
 					</p>
 				</div>
 
-			<? }else{ ?>
+			<?php }else{ ?>
 				<div class="row loginblock">
 					<div class="col-md-6">
 						<h2>Log in</h2>
@@ -47,7 +47,7 @@
 						<h2>Geen account?</h2>	
 					</div>
 				</div>
-			<? } ?>
+			<?php } ?>
 
 		</div>
 	</div>

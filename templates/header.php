@@ -39,11 +39,11 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="<?= $baseUrl ?>">
-                <? if(isset($_SESSION['project']['title'])){ ?>
+                <?php if(isset($_SESSION['project']['title'])){ ?>
                     <?= $_SESSION['project']['title'] ?>
-                <? }else{ ?>
+                <?php }else{ ?>
                     Home
-                <? } ?>
+                <?php } ?>
                 </a>
         </div>
 
@@ -67,11 +67,11 @@
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <? if(isset($_SESSION['user'])){ ?>
-                    <li><a href="<?= $baseUrl ?>user/logout"><? echo $_SESSION['user']['username']; ?> uitloggen </a></li>
-                <? }else{ ?>
-                    <li><a href="<?= $baseUrl ?>"><? echo $_SESSION['user']['username']; ?> inloggen? </a></li>
-                <? } ?>
+                <?php if(isset($_SESSION['user'])){ ?>
+                    <li><a href="<?= $baseUrl ?>user/logout"><?php echo $_SESSION['user']['username']; ?> uitloggen </a></li>
+                <?php }else{ ?>
+                    <li><a href="<?= $baseUrl ?>"><?php echo $_SESSION['user']['username']; ?> inloggen? </a></li>
+                <?php } ?>
             </ul>
         </div>
     </div>
