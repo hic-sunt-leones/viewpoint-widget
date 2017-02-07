@@ -63,7 +63,7 @@
                 -->
 
 
-                <li class=""><a href="{{ path('faq') }}">Handleiding</a></li>
+                <li class=""><a href="to-be-announced">Handleiding</a></li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">

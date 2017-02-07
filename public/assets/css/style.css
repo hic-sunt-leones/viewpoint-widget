@@ -50,8 +50,11 @@ a, a:hover{
 	background-color: #000;
 }
 a.navbar-brand{
-	font-family: BenchNine;
-	font-size: 22px;
+  font-family: BenchNine;
+  font-size: 22px;
+}
+.navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover{
+  color: #FFBC00;
 }
 .loginblock{
 	background-color: #FFBC00;
