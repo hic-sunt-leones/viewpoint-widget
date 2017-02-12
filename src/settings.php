@@ -12,7 +12,8 @@ return [
 
         // Api settings
         'api' => [
-            'apiUrl' => 'http://hetvolk.sf3/app_dev.php/api/', // hetvolk.org api url
+            //'apiUrl' => 'http://hetvolk.sf3/app_dev.php/api/', // hetvolk.org api url
+            'apiUrl' => 'http://hetvolk.local:8888/app_dev.php/api/', // hetvolk.org api url
         ],
 
         // Monolog settings
