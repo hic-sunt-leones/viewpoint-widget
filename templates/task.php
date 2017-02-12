@@ -120,13 +120,13 @@
 
     var options = {
         cameraIcon: L.icon({
-            iconUrl: 'public/assets/img/camera.svg',
+            iconUrl: '<?= $baseUrl ?>assets/img/camera.svg',
             iconSize: [38, 38],
             iconAnchor: [19, 19]
         }),
 
         targetIcon: L.icon({
-            iconUrl: 'public/assets/img/target.svg',
+            iconUrl: '<?= $baseUrl ?>assets/img/target.svg',
             iconSize: [180, 32],
             iconAnchor: [90, 16]
         })

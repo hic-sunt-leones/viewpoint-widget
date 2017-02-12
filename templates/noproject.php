@@ -16,8 +16,6 @@
 		</div>
 		<div class="col-md-6">
 
-
-
 			<div class="startblok">
 				<h3>Zien welke projecten er lopen?</h3>
 
@@ -27,7 +25,6 @@
 				</p>
 			</div>
 
-			
 		</div>
 	</div>
 </div>

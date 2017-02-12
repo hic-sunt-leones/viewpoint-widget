@@ -43,8 +43,7 @@
 						
 					</div>
 					<div class="col-md-6">
-						
-						<h2>Geen account?</h2>	
+						<h2>Geen account?</h2>
 					</div>
 				</div>
 			<?php } ?>
