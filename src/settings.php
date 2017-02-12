@@ -3,7 +3,7 @@ return [
     'settings' => [
         'displayErrorDetails' => true, // set to false in production
         'addContentLengthHeader' => false, // Allow the web server to send the content-length header
-        'baseUrl' => '/viewpoint-widget/', // base web url for app
+        'baseUrl' => '/viewpoint/', // base web url for app
 
         // Renderer settings
         'renderer' => [
@@ -12,7 +12,7 @@ return [
 
         // Api settings
         'api' => [
-            'apiUrl' => 'http://hetvolk.local:8888/app_dev.php/api/', // hetvolk.org api url
+            'apiUrl' => 'http://hetvolk.sf3/app_dev.php/api/', // hetvolk.org api url
         ],
 
         // Monolog settings
