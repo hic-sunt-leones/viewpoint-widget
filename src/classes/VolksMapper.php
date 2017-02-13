@@ -5,7 +5,7 @@ namespace Leones;
 class Volksmapper
 {   
 
-    function __construct($settings) {
+    public function __construct($settings) {
        $this->settings = $settings;
     }
 
