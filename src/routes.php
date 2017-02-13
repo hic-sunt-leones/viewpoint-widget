@@ -185,5 +185,13 @@ $app->get('/thanks', function ($request, $response, $args) {
 })->setName('thanks')->add($projectExists)->add($userExists);
 
 
+$app->get('/manual', function ($request, $response, $args) {
+
+    $args['baseUrl'] = $this->get('settings')['baseUrl'];
+
+    return $this->renderer->render($response, 'manual.php', $args);
+})->setName('manual')->add($projectExists);
+
+
 
 

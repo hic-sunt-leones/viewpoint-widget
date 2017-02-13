@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="19px" viewBox="0 0 22 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <title>Slice 1</title>
+    <description>Created with Sketch (http://www.bohemiancoding.com/sketch)</description>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <path d="M10.9331055,13.8305445 L7.47412109,13.8305445 L7.47412109,6.92356771 L22.1748047,6.92356771 L22.1748047,13.8305445 L18.4996338,13.8305445 L18.4996338,15.9235677 L10.9331055,15.9235677 L10.9331055,13.8305445 Z" id="Rectangle-1" fill="#D4D4D4" sketch:type="MSShapeGroup" transform="translate(14.824463, 11.423568) rotate(-180.000000) translate(-14.824463, -11.423568) "></path>
+        <path d="M7.94736842,11 L5,11 L5,4 L19,4 L19,11 L15.3157895,11 L15.3157895,13 L7.94736842,13 L7.94736842,11 Z" id="Rectangle-1" fill="#9B9B9B" sketch:type="MSShapeGroup" transform="translate(12.000000, 8.500000) rotate(-180.000000) translate(-12.000000, -8.500000) "></path>
+        <path d="M4.94736842,8 L2,8 L2,1 L16,1 L16,8 L12.3157895,8 L12.3157895,10 L4.94736842,10 L4.94736842,8 Z" id="Rectangle-1" fill="#3B3B3B" sketch:type="MSShapeGroup" transform="translate(9.000000, 5.500000) rotate(-180.000000) translate(-9.000000, -5.500000) "></path>
+    </g>
+</svg>

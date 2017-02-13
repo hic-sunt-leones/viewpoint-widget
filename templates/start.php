@@ -44,6 +44,8 @@
 					</div>
 					<div class="col-md-6">
 						<h2>Geen account?</h2>
+						<p>
+						Om mee te doen aan dit project heb je <a target="_blank" href="https://hetvolk.org/register/">een account van hetvolk.org</a> nodig. 
 					</div>
 				</div>
 			<?php } ?>

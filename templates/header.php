@@ -68,9 +68,12 @@
                     </ul>
                 </li>
                 -->
-
-                <li class=""><a href="to-be-announced">Handleiding</a></li>
-
+                <?php 
+                    if(isset($_SESSION['project']['instructionUrl']) 
+                        && $_SESSION['project']['instructionUrl']!="") { 
+                        ?>
+                <li class=""><a target="_blank" href="<?= $_SESSION['project']['instructionUrl'] ?>">Handleiding</a></li>
+                <?php } ?>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <?php if (isset($_SESSION['user'])) { ?>
@@ -78,7 +81,7 @@
                             uitloggen </a>
                     </li>
                 <?php } else { ?>
-                    <li><a href="<?= $baseUrl ?>"> inloggen? </a></li>
+                    <?php /* <li><a href="<?= $baseUrl ?>"> inloggen? </a></li> */ ?>
                 <?php } ?>
             </ul>
         </div>
