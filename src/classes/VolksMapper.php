@@ -2,11 +2,13 @@
 
 namespace Leones;
 
-class Volksmapper
-{   
 
-    public function __construct($settings) {
-       $this->settings = $settings;
+class Volksmapper
+{
+
+    public function __construct($settings)
+    {
+        $this->settings = $settings;
     }
 
     // vars
@@ -14,80 +16,84 @@ class Volksmapper
 
 
     // methods
-    public function getProjectByUUID($uuid) {
-        $url = $this->settings['apiUrl'] . "projects/uuid/" . $uuid; 
-                
-        $ch = curl_init();  
-        curl_setopt($ch,CURLOPT_URL,$url);
-        curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-        curl_setopt($ch,CURLOPT_HEADER, "Accept:application/json"); 
-        $output=curl_exec($ch);
+    public function getProjectByUUID($uuid)
+    {
+        $url = $this->settings['apiUrl'] . "projects/uuid/" . $uuid;
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HEADER, "Accept:application/json");
+        $output = curl_exec($ch);
         curl_close($ch);
 
-        $data = json_decode($output,true);
+        $data = json_decode($output, true);
 
-        if(isset($data['project'])){
+        if (isset($data['project'])) {
             $data['project']['uuid'] = $uuid;
+
             return $data['project'];
-        }else{
+        } else {
             return false;
         }
     }
 
-    public function getToken($name,$pass){
-        
-        
+    public function getToken($name, $pass)
+    {
+
+
         $url = $this->settings['apiUrl'] . "authenticate";
-        $postData = array("_username"=>$name,"_password"=>$pass);
-       
-        $ch = curl_init();  
-        curl_setopt($ch,CURLOPT_URL,$url);
-        curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-        curl_setopt($ch,CURLOPT_HEADER, "Accept:application/json"); 
-        curl_setopt($ch,CURLOPT_POSTFIELDS, $postData);    
-        $output=curl_exec($ch);
+        $postData = array("_username" => $name, "_password" => $pass);
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HEADER, "Accept:application/json");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+        $output = curl_exec($ch);
         curl_close($ch);
 
-        $data = json_decode($output,true);
+        $data = json_decode($output, true);
 
-        if(isset($data['token'])){
+        if (isset($data['token'])) {
             return $data['token'];
-        }else{
+        } else {
             return false;
         }
 
 
     }
 
-    public function getUser($token){
-        
+    public function getUser($token)
+    {
+
         $url = $this->settings['apiUrl'] . "people/me";
-       
+
         $curl = $this->getCurlResponse($url);
 
-        $data = json_decode($curl,true);
+        $data = json_decode($curl, true);
 
-        if($data['user']){
+        if ($data['user']) {
             return $data['user'];
-        }else{
+        } else {
             return false;
         }
-
 
     }
 
 
-    public function getTask(){
-        
+    public function getTask()
+    {
+
         $url = $this->settings['apiUrl'] . "tasks/next";
-        $postData = array("task"=> array("projectId"=>$_SESSION['project']['id']));
+        $postData = array("task" => array("projectId" => $_SESSION['project']['id']));
 
-        $curl = $this->getCurlResponse($url,$postData);
+        $curl = $this->getCurlResponse($url, $postData);
 
-        $data = json_decode($curl,true);
-        if($data['task']){
+        $data = json_decode($curl, true);
+        if ($data['task']) {
             return $data['task'];
-        }else{
+        } else {
             return false;
         }
 
@@ -95,47 +101,48 @@ class Volksmapper
     }
 
 
-    public function saveTask($postdata){
-        
+    public function saveTask($postdata)
+    {
+
         $url = $this->settings['apiUrl'] . "tasks/save";
         $postData = array(
-                        "task"=> array(
-                                    "projectId"=>$_SESSION['project']['id'],
-                                    "itemId"=>$postdata['itemId'],
-                                    "data"=>array(
-                                                "target" => json_decode($postdata['targetPoint']),
-                                                "camera" => json_decode($postdata['cameraPoint']),
-                                                "geojson" => json_decode($postdata['fieldOfView'])
-                                            )
-                                )
-                        );
-        $curl = $this->getCurlResponse($url,$postData);
-        
-        if($curl){
+            "task" => array(
+                "projectId" => $_SESSION['project']['id'],
+                "itemId"    => $postdata['itemId'],
+                "data"      => array(
+                    "target"  => json_decode($postdata['targetPoint']),
+                    "camera"  => json_decode($postdata['cameraPoint']),
+                    "geojson" => json_decode($postdata['fieldOfView'])
+                )
+            )
+        );
+        $curl = $this->getCurlResponse($url, $postData);
+
+        if ($curl) {
             return true;
-        }else{
+        } else {
             return false;
         }
-
 
     }
 
 
-    public function skipTask($itemId){
-        
+    public function skipTask($itemId)
+    {
+
         $url = $this->settings['apiUrl'] . "tasks/skip";
         $postData = array(
-                        "task"=> array(
-                                    "projectId"=>$_SESSION['project']['id'],
-                                    "itemId"=>$itemId
-                                )
-                        );
-        
-        $curl = $this->getCurlResponse($url,$postData);
+            "task" => array(
+                "projectId" => $_SESSION['project']['id'],
+                "itemId"    => $itemId
+            )
+        );
 
-        if($curl){
+        $curl = $this->getCurlResponse($url, $postData);
+
+        if ($curl) {
             return true;
-        }else{
+        } else {
             return false;
         }
 
@@ -143,15 +150,16 @@ class Volksmapper
     }
 
 
-    private function getCurlResponse($url, $postData = array()){
+    private function getCurlResponse($url, $postData = array())
+    {
 
-        if(empty($postData)){
+        if (empty($postData)) {
             $data_string = "";
-        }else{
+        } else {
             $data_string = json_encode($postData);
         }
 
-        $ch = curl_init($url);  
+        $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -162,19 +170,20 @@ class Volksmapper
             )
         );
         $output = curl_exec($ch);
-        if($output === false){
-            echo 'Curl error: ' . curl_error($ch);
+        if ($output === false) {
+            //echo 'Curl error: ' . curl_error($ch);
+
             return false;
         }
 
         $info = curl_getinfo($ch);
         curl_close($ch);
-        
 
-        if($info['http_code']===200){
+
+        if ($info['http_code'] === 200) {
             return $output;
-        }else{
-            print_r($info);
+        } else {
+            //print_r($info);
             return false;
         }
     }
