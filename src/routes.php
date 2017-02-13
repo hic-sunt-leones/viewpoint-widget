@@ -3,9 +3,6 @@
 
 
 $app->get('/', function ($request, $response, $args) {
-
-    $args['baseUrl'] = $this->get('settings')['baseUrl'];
-
 	if(isset($_SESSION['project'])){
 		return $this->renderer->render($response, 'start.php', $args);
 	}else{
@@ -89,8 +86,6 @@ $app->get('/user/stats', function ($request, $response, $args) {
 
 
 $app->get('/get-task', function ($request, $response, $args) {
-
-    $args['baseUrl'] = $this->get('settings')['baseUrl'];
 
     // get new task from hetvolk api
     $mapper = new Leones\VolksMapper($this->get('settings')['api']);
@@ -178,7 +173,6 @@ $app->get('/skip-task', function ($request, $response, $args) {
 
 $app->get('/thanks', function ($request, $response, $args) {
 
-    $args['baseUrl'] = $this->get('settings')['baseUrl'];
     $args['toNewTask'] = $this->router->pathFor('task');
 
     return $this->renderer->render($response, 'thanks.php', $args);
@@ -186,8 +180,6 @@ $app->get('/thanks', function ($request, $response, $args) {
 
 
 $app->get('/manual', function ($request, $response, $args) {
-
-    $args['baseUrl'] = $this->get('settings')['baseUrl'];
 
     return $this->renderer->render($response, 'manual.php', $args);
 })->setName('manual')->add($projectExists);
