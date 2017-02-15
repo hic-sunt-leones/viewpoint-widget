@@ -42,6 +42,11 @@
         </div>
         <div class="col-md-6">
 
+            <div class="warning">
+                <h3 style="color: #F30211">Let op: je bent aan het oefenen! Er wordt niks opgeslagen!</h3>
+
+                <a href="/" class="form-control btn btn-info">Ok, breng me naar het echte werk!</a>
+            </div>
             <h3><?= $task['question'] ?><?= $task['angle']?></h3>
 
             <div id="map-container">
@@ -67,8 +72,8 @@
             </form>
 
 
-            <button id="skip-button" class="btn btn-default">taak overslaan</button>
-            <button id="save-button" class="btn btn-primary">taak opslaan</button>
+            <a href="<?= $baseUrl ?>try-task" id="skip-button" class="btn btn-default">taak overslaan</a>
+            <a href="<?= $baseUrl ?>try-task" id="save-button" class="btn btn-primary">taak opslaan</a>
 
             <?php if ($task['description'] != "") { ?>
                 <p>
@@ -174,14 +179,7 @@
 
     $(document).ready(function () {
 
-        $("#save-button").click(function () {
-            $("#task-form").submit();
-        });
-
-        $("#skip-button").click(function () {
-            // $.post( "/skip-task", $( "#task-form" ).serialize() );
-            window.location = "<?= $baseUrl ?>skip-task?itemId=" + $('#itemId').val();
-        });
+        
 
     });
 

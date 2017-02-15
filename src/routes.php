@@ -34,7 +34,6 @@ $app->get('/get-project/{uuid}', function ($request, $response, $args) {
 
 
 
-
 $app->post('/user/login', function ($request, $response, $args) {
     
     // get token from hetvolk api
@@ -98,7 +97,12 @@ $app->get('/get-task', function ($request, $response, $args) {
         return $response = $response->withRedirect($uri, 403);
     }
 
-    $mapLatLon = explode(",",$args['task']['mapLatLon']);
+    if(empty($args['task']['item']['location'])){ // specific latlon for record?
+        $mapLatLon = explode(",",$args['task']['mapLatLon']);
+    }else{
+        $mapLatLon = explode(",",$args['task']['item']['location']);
+        $args['task']['mapLatLon'] = $args['task']['item']['location'];
+    }
     $args['task']['mapLonLat'] = trim($mapLatLon[1]) . ", " . trim($mapLatLon[0]);
     
     return $this->renderer->render($response, 'task.php', $args);
@@ -112,19 +116,18 @@ $app->get('/try-task', function ($request, $response, $args) {
 
     // get new task from hetvolk api
     $mapper = new Leones\VolksMapper($this->get('settings')['api']);
-    $args['task'] = $mapper->getTask();
+    $args['task'] = $mapper->demoTask();
+    $_SESSION['task'] = $args['task'];
 
-    if(!$args['task']){                     // probably, Expired JWT Token
-        unset($_SESSION['token']);
-        unset($_SESSION['user']);
-        $uri = $this->router->pathFor('home');
-        return $response = $response->withRedirect($uri, 403);
+    if(empty($args['task']['item']['location'])){ // specific latlon for record?
+        $mapLatLon = explode(",",$args['task']['mapLatLon']);
+    }else{
+        $mapLatLon = explode(",",$args['task']['item']['location']);
+        $args['task']['mapLatLon'] = $args['task']['item']['location'];
     }
-
-    $mapLatLon = explode(",",$args['task']['mapLatLon']);
     $args['task']['mapLonLat'] = trim($mapLatLon[1]) . ", " . trim($mapLatLon[0]);
-    
-    return $this->renderer->render($response, 'task.php', $args);
+
+    return $this->renderer->render($response, 'demo.php', $args);
 })->setName('task')->add($projectExists)->add($userExists);
 
 

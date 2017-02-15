@@ -87,10 +87,11 @@ class Volksmapper
 
         $url = $this->settings['apiUrl'] . "tasks/next";
         $postData = array("task" => array("projectId" => $_SESSION['project']['id']));
-
+        
         $curl = $this->getCurlResponse($url, $postData);
 
         $data = json_decode($curl, true);
+
         if ($data['task']) {
             return $data['task'];
         } else {
@@ -142,6 +143,31 @@ class Volksmapper
 
         if ($curl) {
             return true;
+        } else {
+            return false;
+        }
+
+
+    }
+
+
+    public function demoTask()
+    {
+
+        $url = $this->settings['apiUrl'] . "projects/uuid/" . $_SESSION['project']['uuid'] . "/demo";
+        
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HEADER, "Accept:application/json");
+        $output = curl_exec($ch);
+        curl_close($ch);
+
+        $data = json_decode($output, true);
+        
+        if ($data['task']) {
+            return $data['task'];
         } else {
             return false;
         }

@@ -5,6 +5,8 @@
 
 			<h1><?= $_SESSION['project']['title'] ?></h1>
 			
+			<p class="lead"><em>Een project van <?= nl2br($_SESSION['project']['organisation']) ?></em></p>
+			
 			<p class="lead"><?= nl2br($_SESSION['project']['description']) ?></p>
 
 		</div>
@@ -22,7 +24,7 @@
 					</p>
 
 					<p><br />
-					<a href="<?= $baseUrl ?>get-task" class="btn btn-primary"> Geef mij maar een taak! </a> <a href="<?= $baseUrl ?>try-task/" class="btn btn-primary"> Oefenen </a>
+					<a href="<?= $baseUrl ?>get-task" class="btn btn-primary"> Geef mij maar een taak! </a> <a href="<?= $baseUrl ?>try-task" class="btn btn-primary"> Oefenen </a>
 					</p>
 				</div>
 

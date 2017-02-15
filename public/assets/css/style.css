@@ -144,5 +144,14 @@ a.navbar-brand{
   #sidebar, .hljs {
     background-color: #fafafa;
   }
+  
+.warning{
+  background-color: #FFD8CE;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+.warning .btn{
+  margin-bottom: 0;
+}
 
 
