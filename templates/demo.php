@@ -45,7 +45,7 @@
             <div class="warning">
                 <h3 style="color: #F30211">Let op: je bent aan het oefenen! Er wordt niks opgeslagen!</h3>
 
-                <a href="/" class="form-control btn btn-info">Ok, breng me naar het echte werk!</a>
+                <a href="<?= $baseUrl ?>" class="form-control btn btn-info">Ok, breng me naar het echte werk!</a>
             </div>
             <h3><?= $task['question'] ?><?= $task['angle']?></h3>
 
