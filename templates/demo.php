@@ -72,9 +72,9 @@
             </form>
 
 
-            <a href="<?= $baseUrl ?>try-task" id="skip-button" class="btn btn-default">taak overslaan</a>
             <a href="<?= $baseUrl ?>try-task" id="save-button" class="btn btn-primary">taak opslaan</a>
-
+            <a href="<?= $baseUrl ?>try-task" id="skip-button" class="btn btn-default">taak overslaan</a>
+            
             <?php if ($task['description'] != "") { ?>
                 <p>
                     <?= $task['description'] ?>

@@ -42,7 +42,7 @@
         </div>
         <div class="col-md-6">
 
-            <h3><?= $task['question'] ?><?= $task['angle']?></h3>
+            <h3><?= $task['question'] ?></h3>
 
             <div id="map-container">
                 <div id="map">
@@ -67,8 +67,8 @@
             </form>
 
 
-            <button id="skip-button" class="btn btn-default">taak overslaan</button>
             <button id="save-button" class="btn btn-primary">taak opslaan</button>
+            <button id="skip-button" class="btn btn-default">taak overslaan</button>
 
             <?php if ($task['description'] != "") { ?>
                 <p>
