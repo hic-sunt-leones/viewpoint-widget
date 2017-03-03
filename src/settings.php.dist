@@ -4,6 +4,7 @@ return [
         'displayErrorDetails' => true, // set to false in production
         'addContentLengthHeader' => false, // Allow the web server to send the content-length header
         'baseUrl' => '/', // base web url for app
+        'determineRouteBeforeAppMiddleware' => true,
 
         // Renderer settings
         'renderer' => [
@@ -12,8 +13,13 @@ return [
 
         // Api settings
         'api' => [
-            //'apiUrl' => 'http://hetvolk.sf3/app_dev.php/api/', // hetvolk.org api url
             'apiUrl' => 'http://hetvolk.local:8888/app_dev.php/api/', // hetvolk.org api url
+        ],
+        
+        // Widget settings
+        'widget' =>[
+            'type' => 5, // viewpoint type
+            'secure_cookie' => true,
         ],
 
         // Monolog settings

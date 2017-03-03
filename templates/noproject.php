@@ -6,7 +6,7 @@
 
             <p class="lead">
                 U bent hier terechtgekomen omdat onduidelijk is aan welk project u wilt werken. Waarschijnlijk is er in
-                de url geen project-id meegekomen. Een url met project-id ziet er ongeveer als volgt uit: <em>https://viewpoint.hetvolk.org/get-project/400e4a3d-215f-48ea-ba1d-c67a5ef7abb9</em>,
+                de url geen project-id meegekomen. Een url met project-id ziet er ongeveer als volgt uit: <em>https://widgets.hetvolk.org<?=$router->pathFor('start', ['uuid' => '400e4a3d-215f-48ea-ba1d-c67a5ef7abb9'])?></em>,
                 waarbij de code op het eind natuurlijk een andere is.
             </p>
 

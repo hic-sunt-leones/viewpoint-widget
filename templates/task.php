@@ -25,7 +25,6 @@
                     <?php
                     if (! is_array($task['item']['data'])) {
                         $task['item']['data'] = json_decode($task['item']['data'], true);
-                        echo "[data was nog jsonblob, zou array moeten zijn?]<br />";
                     }
                     ?>
                     <table class="table">
@@ -56,7 +55,7 @@
             </div>
 
 
-            <form id="task-form" action="<?= $baseUrl ?>save-task" method="post">
+            <form id="task-form" action="<?= $router->pathFor('save-task', ['uuid' => $project['uuid']])?>" method="post">
                 <input class="form-control" type="hidden" name="itemId" id="itemId" value="<?= $task['item']['id'] ?>"/>
                 <input class="form-control" type="hidden" name="targetPoint" id="targetPoint"/>
                 <input class="form-control" type="hidden" name="cameraPoint" id="cameraPoint"/>
@@ -76,8 +75,8 @@
                 </p>
             <?php } ?>
 
-            <?php if (!empty($_SESSION['project']['instructionUrl'])) { ?>
-            <p>Een uitgebreide instructie en handige tips vind je in <a href="<?= $_SESSION['project']['instructionUrl']?>">de handleiding</a></p>
+            <?php if (!empty($project['instructionUrl'])) { ?>
+            <p>Een uitgebreide instructie en handige tips vind je in <a href="<?= $project['instructionUrl']?>">de handleiding</a></p>
             <?php } ?>
 
 
@@ -180,7 +179,7 @@
 
         $("#skip-button").click(function () {
             // $.post( "/skip-task", $( "#task-form" ).serialize() );
-            window.location = "<?= $baseUrl ?>skip-task?itemId=" + $('#itemId').val();
+            window.location = "<?= $router->pathFor('skip-task', ['uuid' => $project['uuid']])?>?itemId=" + $('#itemId').val();
         });
 
     });

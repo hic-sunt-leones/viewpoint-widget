@@ -1,59 +1,61 @@
-
 <div class="container">
-	<div class="row">
-		<div class="col-md-6">
+    <div class="row">
+        <div class="col-md-6">
 
-			<h1><?= $_SESSION['project']['title'] ?></h1>
-			
-			<p class="lead"><em>Een project van <?= nl2br($_SESSION['project']['organisation']) ?></em></p>
-			
-			<p class="lead"><?= nl2br($_SESSION['project']['description']) ?></p>
+            <h1><?= $project['title'] ?></h1>
 
-		</div>
-		<div class="col-md-6">
+            <p class="lead"><em>Een project van <?= nl2br($project['organisation']) ?></em></p>
 
+            <p class="lead"><?= nl2br($project['description']) ?></p>
 
-			<?php if(isset($_SESSION['user'])){ ?>
+        </div>
+        <div class="col-md-6">
 
+            <?php if (isset($user)) { ?>
 
-				<div class="startblok">
-					<h3>Hallo <?= $_SESSION['user']['username'] ?></h3>
+                <div class="startblok">
+                    <h3>Hallo <?= $user['username'] ?></h3>
 
-					<p>
-					<?= $_SESSION['project']['instruction'] ?>
-					</p>
+                    <p>
+                        <?= $project['instruction'] ?>
+                    </p>
 
-					<p><br />
-					<a href="<?= $baseUrl ?>get-task" class="btn btn-primary"> Geef mij maar een taak! </a> <a href="<?= $baseUrl ?>try-task" class="btn btn-primary"> Oefenen </a>
-					</p>
-				</div>
+                    <p><br/>
+                        <a href="<?= $router->pathFor('get-task', ['uuid' => $project['uuid']])?>" class="btn btn-primary"> Geef mij maar
+                            een taak! </a>
+                        <a href="<?= $router->pathFor('try-task', ['uuid' => $project['uuid']])?>" class="btn btn-primary"> Oefenen </a>
+                    </p>
+                </div>
 
-			<?php }else{ ?>
-				<div class="row loginblock">
-					<div class="col-md-6">
-						<h2>Log in</h2>
+            <?php } else { ?>
+                <div class="row loginblock">
+                    <div class="col-md-6">
+                        <h2>Log in</h2>
 
-						<form action="<?= $baseUrl ?>user/login" method="post">
+                        <form action="<?= $router->pathFor('login')?>" method="post">
 
-						<input class="form-control" placeholder="gebruikersnaam of emailadres" type="text" name="name" /><br />
+                            <input class="form-control" placeholder="gebruikersnaam of emailadres" type="text"
+                                   name="name"/><br/>
 
-						<input class="form-control" placeholder="wachtwoord" type="password" name="password" /><br />
+                            <input class="form-control" placeholder="wachtwoord" type="password" name="password"/><br/>
+                            <input type="hidden" name="uuid" value="<?=$project['uuid']?>"/><br/>
 
-						<input class="btn btn-primary" type="submit" value="Log In" />
+                            <input class="btn btn-primary" type="submit" value="Log In"/>
 
-						</form>
-						
-					</div>
-					<div class="col-md-6">
-						<h2>Geen account?</h2>
-						<p>
-						Om mee te doen aan dit project heb je <a target="_blank" href="https://hetvolk.org/register/">een account van hetvolk.org</a> nodig. 
-					</div>
-				</div>
-			<?php } ?>
+                        </form>
 
-		</div>
-	</div>
+                    </div>
+                    <div class="col-md-6">
+                        <h2>Geen account?</h2>
+                        <p>
+                            Om mee te doen aan dit project heb je
+                            <a target="_blank" href="https://hetvolk.org/register/">een account van hetvolk.org</a> nodig.
+                    </div>
+                </div>
+            <?php } ?>
+
+        </div>
+    </div>
 </div>
 
 

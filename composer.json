@@ -15,14 +15,16 @@
         "php": ">=5.5.0",
         "slim/slim": "^3.1",
         "slim/php-view": "^2.0",
-        "monolog/monolog": "^1.17"
+        "monolog/monolog": "^1.17",
+        "akrabat/rka-slim-session-middleware": "^2.0",
+        "slim/flash": "^0.2.0"
     },
     "require-dev": {
         "phpunit/phpunit": ">=4.8 < 6.0"
     },
     "autoload": {
         "psr-4": {
-            "Leones\\": "src/classes/"
+            "Leones\\": "src/Leones/"
         }
     },
     "autoload-dev": {
