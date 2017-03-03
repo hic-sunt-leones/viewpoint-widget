@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        <?php if (isset($_SESSION['project'])) { ?>
-        <?= $_SESSION['project']['title'] ?>
+        <?php if (isset($project)) { ?>
+            <?= $project['title'] ?> --
         <?php } ?>
+        hetvolk.org widget
     </title>
 
     <script
@@ -28,9 +29,32 @@
 
     <link rel="stylesheet" type="text/css" media="all" href="<?= $baseUrl ?>assets/css/style.css"/>
 
+    <script src="<?= $baseUrl ?>assets/js/pdx.js" type="application/javascript"></script>
+    <script type="application/javascript">
+        $(document).ready(function () {
+
+            <?php
+            if (isset($flash['notice'])):
+            foreach($flash['notice'] as $msg):?>
+            alertMessage('<?= $msg?>', 'alert-success');
+            <?php
+            endforeach;
+            endif;
+
+            if (isset($flash['error'])):
+            foreach($flash['error'] as $msg):?>
+            alertMessage('<?= $msg?>', 'alert-danger');
+            <?php
+            endforeach;
+            endif;
+            ?>
+
+        });
+    </script>
+
 </head>
 
-<body>
+<body id="top">
 
 <!-- Fixed navbar -->
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -43,47 +67,51 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="<?= $baseUrl ?>">
-                <?php if (isset($_SESSION['project'])) { ?>
-                    <?php if (isset($_SESSION['project']['title'])) { ?>
-                        <?= $_SESSION['project']['title'] ?>
-                    <?php } else { ?>
-                        Home
-                    <?php } ?>
-                <?php } ?>
-            </a>
+
+            <?php if (isset($project)): ?>
+                <a class="navbar-brand" href="<?= $router->pathFor('start', ['uuid' => $project['uuid']])?>">
+                    <?= $project['title'] ?>
+                </a>
+            <?php else: ?>
+                <a class="navbar-brand" href="<?= $router->pathFor('home')?>">Home</a>
+            <?php endif; ?>
         </div>
 
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
 
-                <!--
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Projecten
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="{{ path('projects-overview') }}">alle projecten</a></li>
-                        <li><a href="{{ path('myprojects-overview') }}">mijn projecten</a></li>
-                        <li><a href="{{ path('myprojects-new') }}">nieuw project maken</a></li>
-                    </ul>
-                </li>
-                -->
-                <?php 
-                    if(isset($_SESSION['project']['instructionUrl']) 
-                        && $_SESSION['project']['instructionUrl']!="") { 
-                        ?>
-                <li class=""><a target="_blank" href="<?= $_SESSION['project']['instructionUrl'] ?>">Handleiding</a></li>
-                <?php } ?>
+                <?php
+                if (isset($project['instructionUrl'])): ?>
+                    <li class=""><a target="_blank" href="<?= $project['instructionUrl'] ?>">Handleiding</a>
+                    </li>
+                <?php endif ?>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <?php if (isset($_SESSION['user'])) { ?>
-                    <li><a href="<?= $baseUrl ?>user/logout"><?php echo $_SESSION['user']['username']; ?>
+                <?php if (isset($user)) { ?>
+                    <li><a href="<?= $router->pathFor('logout', ['uuid' => $project['uuid']])?>"><?php echo $user['username']; ?>
                             uitloggen </a>
                     </li>
-                <?php } else { ?>
-                    <?php /* <li><a href="<?= $baseUrl ?>"> inloggen? </a></li> */ ?>
                 <?php } ?>
             </ul>
         </div>
     </div>
 </nav>
+
+<?= $data['content'] ?>
+
+<div id="footer">
+    <?php if ($debug): ?>
+        <pre>
+<?php print_r($_SESSION); ?>
+</pre>
+    <?php endif; ?>
+</div>
+
+
+<!-- BOOTSTRAP Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>
