@@ -24,20 +24,18 @@ $requireProject = function (Request $request, $response, $next) {
                 $this->get('flash')->addMessage('error',
                     'Sorry, het project bestaat niet (meer) of is niet meer live.');
             }
-
-            return $response = $response->withRedirect($this->router->pathFor('home'), 403);
+            return $response->withRedirect($this->router->pathFor('home'), 403);
         } else {
             $this->get('session')->set($uuid, $project);
         }
     }
-
 
     // check project is of the correct type
     if ($project['type'] !== $this->get('settings')['widget']['type']) {
         unset($this->get('session')->$uuid);
         $this->get('flash')->addMessage('error', 'Sorry, dat project is niet geschikt voor deze widget.');
 
-        return $response = $response->withRedirect($this->router->pathFor('home'), 403);
+        return $response->withRedirect($this->router->pathFor('home'), 403);
     }
 
     // pass project to the view
@@ -52,7 +50,7 @@ $userExists = function ($request, $response, $next) {
     if (! $this->get('session')->get('user')) {
         $uri = $request->getUri()->withPath($this->router->pathFor('home'));
 
-        return $response = $response->withRedirect($uri, 403);
+        return $response->withRedirect($uri, 403);
     }
 
     // make user available in the view

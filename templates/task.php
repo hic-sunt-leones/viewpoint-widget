@@ -75,10 +75,9 @@
                 </p>
             <?php } ?>
 
-            <?php if (!empty($project['instructionUrl'])) { ?>
+            <?php if (isset($project['instructionUrl']) && !empty($project['instructionUrl'])) { ?>
             <p>Een uitgebreide instructie en handige tips vind je in <a href="<?= $project['instructionUrl']?>">de handleiding</a></p>
             <?php } ?>
-
 
         </div>
     </div>

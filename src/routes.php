@@ -91,7 +91,7 @@ $app->get('/get-task/{uuid}', function ($request, $response, $args) {
         unset($this->get('session')->user);
         $uri = $this->router->pathFor('home');
 
-        return $response = $response->withRedirect($uri, 403);
+        return $response->withRedirect($uri, 403);
     }
 
     $task = $mapper->getMapLatLon($task);
@@ -152,7 +152,7 @@ $app->get('/skip-task/{uuid}', function ($request, $response, $args) {
     if ($skipped) {
         $uri = $this->router->pathFor('get-task', ['uuid' => $project['uuid']]);
 
-        return $response = $response->withRedirect($uri, 302);
+        return $response->withRedirect($uri, 302);
     } else {
         $this->get('logger')->addError("API error: could not skip task with itemId ({$itemId}) for user " . $this->get('session')->get('user')['id']);
         $this->get('flash')->addMessage('error', ' nou moe ... te snel geklikt? :-( ');
