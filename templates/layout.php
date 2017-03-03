@@ -29,7 +29,7 @@
 
     <link rel="stylesheet" type="text/css" media="all" href="<?= $baseUrl ?>assets/css/style.css"/>
 
-    <script src="<?= $baseUrl ?>js/pdx.js" type="application/javascript"></script>
+    <script src="<?= $baseUrl ?>assets/js/pdx.js" type="application/javascript"></script>
     <script type="application/javascript">
         $(document).ready(function () {
 

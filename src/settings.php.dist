@@ -19,6 +19,7 @@ return [
         // Widget settings
         'widget' =>[
             'type' => 5, // viewpoint type
+            'cookie_name'   => 'hetvolk-viewpoint',
             'secure_cookie' => true,
         ],
 
