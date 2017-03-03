@@ -44,7 +44,6 @@ $app->post('/user/login', function ($request, $response, $args) {
         if (! $user) {
             $this->get('flash')->addMessage('error',
                 'Nou zeg, hebben we wel een token maar kunnen we de userinfo er niet bij vinden...');
-
             return $response->withStatus(302)->withHeader('Location', $uri);
         } else {
             $this->get('session')->set('user', $user);

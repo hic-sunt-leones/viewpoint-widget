@@ -97,7 +97,6 @@
     </div>
 </nav>
 
-<?php var_dump($flash)?>
 <?= $data['content'] ?>
 
 <div id="footer">
