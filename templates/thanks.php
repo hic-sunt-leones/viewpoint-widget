@@ -1,5 +1,5 @@
 
-<div id="thanks" class="container" onclick="window.location = '<?= $router->pathFor('get-task', ['uuid' => $project['uuid']])?>';">
+<div id="thanks" class="container">
 	<div class="row">
 		<div class="col-md-4">
 
