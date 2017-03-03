@@ -75,7 +75,6 @@
             <?php else: ?>
                 <a class="navbar-brand" href="<?= $router->pathFor('home')?>">Home</a>
             <?php endif; ?>
-            </a>
         </div>
 
         <div id="navbar" class="navbar-collapse collapse">
@@ -98,6 +97,7 @@
     </div>
 </nav>
 
+<?php var_dump($flash)?>
 <?= $data['content'] ?>
 
 <div id="footer">

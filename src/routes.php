@@ -64,13 +64,6 @@ $app->get('/user/logout/{uuid}', function ($request, $response, $args) {
     return $response->withStatus(302)->withHeader('Location', $uri);
 })->setName('logout');
 
-/* later....
-$app->get('/user/stats', function ($request, $response, $args) {
-    $response->getBody()->write(' Hello you stats want, eh? ');
-    return $response;
-});
-*/
-
 
 
 // get new task from hetvolk api (NOT saving this in the session anymore)
