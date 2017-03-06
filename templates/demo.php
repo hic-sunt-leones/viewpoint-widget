@@ -22,11 +22,6 @@
                 <?php } ?>
 
                 <?php if (count($task['item']['data'])) { ?>
-                    <?php
-                    if (! is_array($task['item']['data'])) {
-                        $task['item']['data'] = json_decode($task['item']['data'], true);
-                    }
-                    ?>
                     <table class="table">
                         <?php foreach ($task['item']['data'] as $key => $value) { ?>
                             <tr>
@@ -46,7 +41,7 @@
                 <a href="<?= $router->pathFor('start', ['uuid' => $project['uuid']])?>" class="form-control btn btn-info">Ok, breng me naar het echte werk!</a>
             </div>
 
-            <h3><?= $task['question'] ?><?= $task['angle']?></h3>
+            <h3><?= $task['question'] ?></h3>
 
             <div id="map-container">
                 <div id="map">

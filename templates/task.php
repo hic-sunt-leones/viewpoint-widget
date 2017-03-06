@@ -22,11 +22,6 @@
                 <?php } ?>
 
                 <?php if (count($task['item']['data'])) { ?>
-                    <?php
-                    if (! is_array($task['item']['data'])) {
-                        $task['item']['data'] = json_decode($task['item']['data'], true);
-                    }
-                    ?>
                     <table class="table">
                         <?php foreach ($task['item']['data'] as $key => $value) { ?>
                             <tr>
