@@ -125,7 +125,11 @@
             iconUrl: '<?= $baseUrl ?>assets/img/target.svg',
             iconSize: [180, 32],
             iconAnchor: [90, 16]
-        })
+        }),
+
+        controlCameraImg: '<?= $baseUrl ?>assets/img/camera-icon-zoef.svg',
+
+        controlCrosshairImg: '<?= $baseUrl ?>assets/img/crosshair-icon-zoef.svg'
     }
 
     var geotagPhotoCamera = L.GeotagPhoto.camera(points, options).addTo(map)
