@@ -145,17 +145,6 @@
             updateSidebar()
         });
 
-    <? /*
-    var crosshairOptions = {
-        crosshairHTML: '<img src="<?= $baseUrl ?>assets/img/crosshair.svg" width="100px" />'
-    }
-
-    L.GeotagPhoto.crosshair(crosshairOptions).addTo(map)
-        .on('input', function (event) {
-            var point = this.getCrosshairPoint()
-        });
-    */ ?>
-
     var outputElement = document.getElementById('output');
 
     function updateSidebar() {
