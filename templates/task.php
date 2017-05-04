@@ -132,7 +132,7 @@
         controlCrosshairImg: '<?= $baseUrl ?>assets/img/crosshair-icon-zoef.svg'
     }
 
-    var geotagPhotoCamera = L.GeotagPhoto.camera(points, options).addTo(map)
+    var geotagPhotoCamera = L.geotagPhoto.camera(points, options).addTo(map)
         .on('change', function (event) {
             updateSidebar()
         })
