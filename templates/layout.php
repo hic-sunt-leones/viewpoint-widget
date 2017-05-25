@@ -17,8 +17,8 @@
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css"/>
     <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-geotag-photo/dist/Leaflet.GeotagPhoto.css"/>
-    <script src="https://unpkg.com/leaflet-geotag-photo/dist/Leaflet.GeotagPhoto.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-geotag-photo@0.4.1/dist/Leaflet.GeotagPhoto.css"/>
+    <script src="https://unpkg.com/leaflet-geotag-photo@0.4.1/dist/Leaflet.GeotagPhoto.min.js"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
 
